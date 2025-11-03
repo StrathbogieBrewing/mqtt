@@ -1,0 +1,4 @@
+tinbus.org {
+	root * /home/johny
+	file_server
+}
