@@ -3,6 +3,6 @@
 // 	file_server
 // }
 
-tinbus.org {
+tinbus.org:883 {
 	reverse_proxy localhost:1883
 }

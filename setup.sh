@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt install caddy podman
+apt install caddy podman certbot
 
 caddy start
 
