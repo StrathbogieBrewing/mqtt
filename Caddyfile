@@ -1,4 +1,4 @@
 tinbus.org {
-	root * /home/johny
+	root * /root/mqtt/www
 	file_server
 }

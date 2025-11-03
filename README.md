@@ -1,19 +1,19 @@
 # MQTT Server
 
-From a fresh installation of Debian
+From a fresh installation of Debian check out this repository to the new server.
 
-``` apt update ```
+```apt update```
 
-``` apt install git ```
+```apt install git```
 
-``` git clone https://github.com/StrathbogieBrewing/mqtt.git ```
+```git clone https://github.com/StrathbogieBrewing/mqtt.git```
 
-Check out this repository to the server.
+```cd mqtt```
+
 
 ## Setup
 
-On a fresh Debian instance set up Caddy to provide TLS support
-
+Set up Caddy to provide TLS support
 
 
 ``` apt install caddy ```
