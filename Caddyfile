@@ -3,6 +3,6 @@ tinbus.org {
 	file_server
 }
 
-mqtt.tinbus.org {
+tinbus.org:8883 {
 	reverse_proxy localhost:1883
 }
