@@ -1,42 +1,66 @@
 version: '3'
-
 services:
-  caddy:
-    image: docker.io/caddy:latest
-    restart: unless-stopped
+  certbot-standalone:
+    image: certbot/certbot:latest
+    container_name: certbot_standalone
     ports:
       - "80:80"
-      - "443:443"
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./www:/var/www:ro
-      - caddy_data:/data
-      - caddy_config:/config
-
-  mosquitto:
-    container_name: mosquitto
-    image: docker.io/eclipse-mosquitto:latest # Or a specific version like eclipse-mosquitto:2.0.15
-    restart: unless-stopped
-    ports:
-      - "1883:1883" # Standard MQTT port
-      - "8883:8883" # Standard MQTTS port
-      - "9001:9001" # MQTT over WebSockets (if needed)
-    volumes:
-      - ./mosquitto/config:/mosquitto/config # Mount local config directory
-      - mosquitto_data:/mosquitto/data   # Mount local data directory for persistence
-      - mosquitto_log:/mosquitto/log     # Mount local log directory
-      - caddy_data:/data
+      # Mount host directories for persistent storage of certificates
+      - certbot_etc:/etc/letsencrypt
+      - certbot_var:/var/lib/letsencrypt
+    command: >
+      certonly --standalone 
+      --email johnyhoops@gmail.com 
+      -d tinbus.org 
+      --agree-tos 
+      --no-eff-email
 
 volumes:
-  caddy_data:
-  caddy_config:
-
-  mosquitto_data:
-  mosquitto_log:
+  certbot_etc:
+  certbot_var:
 
 networks:
   network:
     driver: bridge
+
+# version: '3'
+
+# services:
+#   caddy:
+#     image: docker.io/caddy:latest
+#     restart: unless-stopped
+#     ports:
+#       - "80:80"
+#       - "443:443"
+#     volumes:
+#       - ./Caddyfile:/etc/caddy/Caddyfile:ro
+#       - ./www:/var/www:ro
+#       - caddy_data:/data
+#       - caddy_config:/config
+
+#   mosquitto:
+#     container_name: mosquitto
+#     image: docker.io/eclipse-mosquitto:latest # Or a specific version like eclipse-mosquitto:2.0.15
+#     restart: unless-stopped
+#     ports:
+#       - "1883:1883" # Standard MQTT port
+#       - "8883:8883" # Standard MQTTS port
+#       - "9001:9001" # MQTT over WebSockets (if needed)
+#     volumes:
+#       - ./mosquitto/config:/mosquitto/config # Mount local config directory
+#       - mosquitto_data:/mosquitto/data   # Mount local data directory for persistence
+#       - mosquitto_log:/mosquitto/log     # Mount local log directory
+#       - caddy_data:/data
+
+# volumes:
+#   caddy_data:
+#   caddy_config:
+
+  # mosquitto_data:
+  # mosquitto_log:
+
+
 
 
     # nginx:
