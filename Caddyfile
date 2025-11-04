@@ -1,8 +1,4 @@
-// tinbus.org {
-// 	root * /root/mqtt/www
-// 	file_server
-// }
-
-tinbus.org:883 {
-	reverse_proxy localhost:1883
+tinbus.org {
+	root * ./www
+	file_server
 }
