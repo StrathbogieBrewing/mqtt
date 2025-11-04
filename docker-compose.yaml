@@ -25,7 +25,7 @@ services:
       - ./mosquitto/config:/mosquitto/config # Mount local config directory
       - mosquitto_data:/mosquitto/data   # Mount local data directory for persistence
       - mosquitto_log:/mosquitto/log     # Mount local log directory
-      - caddy_data:/caddy/data
+      - caddy_data:/data
 
 volumes:
   caddy_data:
