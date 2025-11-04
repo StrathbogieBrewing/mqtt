@@ -1,4 +1,0 @@
-tinbus.org {
-	root * /var/www
-	file_server
-}
