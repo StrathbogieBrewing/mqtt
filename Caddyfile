@@ -1,4 +1,4 @@
 tinbus.org {
-	root * ./www
+	root * /home/podman/mqtt/www
 	file_server
 }
