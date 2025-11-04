@@ -15,7 +15,7 @@ services:
 
   mosquitto:
     container_name: mosquitto
-    image: eclipse-mosquitto:latest # Or a specific version like eclipse-mosquitto:2.0.15
+    image: docker.io/eclipse-mosquitto:latest # Or a specific version like eclipse-mosquitto:2.0.15
     restart: unless-stopped
     ports:
       - "1883:1883" # Standard MQTT port
