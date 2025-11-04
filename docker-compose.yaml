@@ -1,8 +1,5 @@
 version: '3'
 
-networks:
-    network:
-        driver: bridge
 services:
   caddy:
     image: docker.io/caddy:latest
@@ -12,12 +9,17 @@ services:
       - "443:443"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./www:/var/www:ro
       - caddy_data:/data
       - caddy_config:/config
 
 volumes:
   caddy_data:
   caddy_config:
+
+networks:
+  network:
+    driver: bridge
 
 
     # nginx:
