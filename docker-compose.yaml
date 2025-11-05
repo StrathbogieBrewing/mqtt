@@ -8,30 +8,32 @@ services:
     volumes:
       # Mount host directories for persistent storage of certificates
       - ./certbot:/etc/letsencrypt
-      # - certbot_var:/var/lib/letsencrypt
+      - certbot_var:/var/lib/letsencrypt
     command: >
       certonly --standalone 
       --email johnyhoops@gmail.com 
       -d tinbus.org 
       --agree-tos 
       --no-eff-email
-  # mosquitto:
-  #   container_name: mosquitto
+
+  mosquitto:
+    container_name: mosquitto
+      build:
+        dockerfile: ./mosquitto/Containerfile
   #   image: docker.io/eclipse-mosquitto:latest
   #   restart: unless-stopped
-  #   ports:
+    ports:
   #     - "1883:1883" # Standard MQTT port
-  #     - "8883:8883" # Standard MQTTS port
-  #     - "9001:9001" # MQTT over WebSockets (if needed)
-  #   volumes:
-  #     - ./mosquitto/config:/mosquitto/config # Mount local config directory
-  #     - mosquitto_data:/mosquitto/data   # Mount local data directory for persistence
-  #     - mosquitto_log:/mosquitto/log     # Mount local log directory
-  #     - certbot:/certbot
+      - "8883:8883" # Standard MQTTS port
+    volumes:
+      - ./mosquitto/config:/mosquitto/config # Mount local config directory
+      - ./certbot:/certbot
+      - mosquitto_data:/mosquitto/data   # Mount local data directory for persistence
+      - mosquitto_log:/mosquitto/log     # Mount local log directory
 
-volumes:
-  # certbot:
-  # certbot_var:
+
+# volumes:
+  certbot_var:
   mosquitto_data:
   mosquitto_log:
 
