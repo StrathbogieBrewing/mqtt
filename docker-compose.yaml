@@ -1,39 +1,27 @@
 version: '3'
 services:
-  certbot-standalone:
-    image: docker.io/certbot/certbot:latest
-    container_name: certbot_standalone
-    ports:
-      - "80:80"
-    volumes:
-      # Mount host directories for persistent storage of certificates
-      - ./certbot:/etc/letsencrypt
-      - certbot_var:/var/lib/letsencrypt
-    command: >
-      certonly --standalone 
-      --email johnyhoops@gmail.com 
-      -d tinbus.org 
-      --agree-tos 
-      --no-eff-email
-
   mosquitto:
-    container_name: mosquitto
-      build:
-        dockerfile: ./mosquitto/Containerfile
-  #   image: docker.io/eclipse-mosquitto:latest
-  #   restart: unless-stopped
+    image: eclipse-mosquitto
     ports:
-  #     - "1883:1883" # Standard MQTT port
-      - "8883:8883" # Standard MQTTS port
+      - "1883:1883"
     volumes:
-      - ./mosquitto/config:/mosquitto/config # Mount local config directory
-      - ./certbot:/certbot
-      - mosquitto_data:/mosquitto/data   # Mount local data directory for persistence
-      - mosquitto_log:/mosquitto/log     # Mount local log directory
-
+      - ./mosquitto/config:/mosquitto/config:ro
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+    restart: unless-stopped
+#   mosquitto:
+#     container_name: mosquitto
+#       build:
+#         dockerfile: ./mosquitto/Containerfile
+#     restart: unless-stopped
+#     ports:
+#       - "1883:1883" # Standard MQTT port
+#     volumes:
+#       - ./mosquitto/config:/mosquitto/config # Mount local config directory
+#       - mosquitto_data:/mosquitto/data   # Mount local data directory for persistence
+#       - mosquitto_log:/mosquitto/log     # Mount local log directory
 
 # volumes:
-  certbot_var:
   mosquitto_data:
   mosquitto_log:
 
@@ -41,62 +29,3 @@ networks:
   network:
     driver: bridge
 
-# version: '3'
-
-# services:
-#   caddy:
-#     image: docker.io/caddy:latest
-#     restart: unless-stopped
-#     ports:
-#       - "80:80"
-#       - "443:443"
-#     volumes:
-#       - ./Caddyfile:/etc/caddy/Caddyfile:ro
-#       - ./www:/var/www:ro
-#       - caddy_data:/data
-#       - caddy_config:/config
-
-#   mosquitto:
-#     container_name: mosquitto
-#     image: docker.io/eclipse-mosquitto:latest # Or a specific version like eclipse-mosquitto:2.0.15
-#     restart: unless-stopped
-#     ports:
-#       - "1883:1883" # Standard MQTT port
-#       - "8883:8883" # Standard MQTTS port
-#       - "9001:9001" # MQTT over WebSockets (if needed)
-#     volumes:
-#       - ./mosquitto/config:/mosquitto/config # Mount local config directory
-#       - mosquitto_data:/mosquitto/data   # Mount local data directory for persistence
-#       - mosquitto_log:/mosquitto/log     # Mount local log directory
-#       - caddy_data:/data
-
-# volumes:
-#   caddy_data:
-#   caddy_config:
-
-  # mosquitto_data:
-  # mosquitto_log:
-
-
-
-
-    # nginx:
-    #     image: nginx:latest
-    #     ports:
-    #     - "80:80"
-    #     volumes:
-    #     - "./nginx.conf:/etc/nginx/nginx.conf"
-    #     - "./html:/usr/share/nginx/html"
-    #     - ./certbot/www/:/var/www/certbot/:rw  
-    #     networks:
-    #     - network
-    #     restart: always
-    # certbot:
-    #     image: certbot/certbot:latest
-    #     ports:
-    #     - "80:80"
-    #     volumes:
-    #     - ./certbot/www/:/var/www/certbot/:rw
-    #     - ./certbot/conf/:/etc/letsencrypt/:rw
-    #     networks:
-    #     - network
