@@ -1,9 +1,9 @@
 version: '3'
 services:
   mosquitto:
-    image: eclipse-mosquitto
+    image: docker.io/eclipse-mosquitto
     ports:
-      - "1883:1883"
+      - 1883:1883
     volumes:
       - ./mosquitto/config:/mosquitto/config:ro
       - mosquitto_data:/mosquitto/data
