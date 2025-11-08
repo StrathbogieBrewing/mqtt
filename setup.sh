@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt update
-apt install -y podman podman-compose git wireguard ufw
+apt install -y podman podman-compose git wireguard ufw mosquitto mosquitto-clients
 
 ufw allow 22/tcp
 ufw allow 51820/udp
