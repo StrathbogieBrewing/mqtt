@@ -9,6 +9,8 @@ RUN apk add --no-cache mosquitto
 
 # Expose the port your application listens on
 EXPOSE 8883
+VOLUME /mosquitto
 
+RUN rc-update add mosquitto
 # Define the command to run when the container starts
 #CMD ["/bin/bash"]
