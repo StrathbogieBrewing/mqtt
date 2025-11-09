@@ -14,5 +14,6 @@ services:
 
 networks:
   network:
+    name: mosquitto
     driver: bridge
 
