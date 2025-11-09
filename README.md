@@ -1,6 +1,13 @@
 # MQTT Server
 
-From a fresh installation of Debian check out this repository to the new server.
+From a fresh installation of latest Debian.
+
+## Docker
+
+
+
+
+```
 
 ```apt update```
 
