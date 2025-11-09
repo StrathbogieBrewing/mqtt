@@ -6,8 +6,8 @@ services:
       dockerfile: ./mosquitto/Containerfile
     restart: unless-stopped
     network_mode: host
-    ports:
-      - 1883:1883 # Standard MQTT port
+    # ports:
+    #   - 1883:1883 # Standard MQTT port
     volumes:
       - ./mosquitto/config:/mosquitto/config # Mount local config directory
       - ./mosquitto/data:/mosquitto/data   # Mount local data directory for persistence
