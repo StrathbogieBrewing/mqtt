@@ -4,7 +4,7 @@ FROM alpine:latest
 RUN apk add --no-cache mosquitto
 
 # Expose the port your application listens on
-EXPOSE 8883
+EXPOSE 8883/tcp
 
 VOLUME ["/mosquitto/config", "/mosquitto/data", "/mosquitto/log"]
 

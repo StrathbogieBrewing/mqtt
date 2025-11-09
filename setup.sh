@@ -1,27 +1,28 @@
 #!/bin/bash
 
 apt update
-apt install -y podman podman-compose git wireguard ufw mosquitto mosquitto-clients
+apt install -y podman podman-compose git mosh ufw 
 
 ufw allow 22/tcp
-ufw allow 51820/udp
+ufw allow 8883/tdp
 
-mkdir -p /etc/wireguard/keys
-cd /etc/wireguard/keys
-umask 077
-wg genkey | tee privatekey | wg pubkey > publickey
+adduser podman
 
-# mkdir /etc/wiregaurd/
-cp wiregaurd.conf /etc/wiregaurd/
-
-systemctl start wg-quick@wg0.service
-
-useradd podman
+git clone https://github.com/StrathbogieBrewing/mqtt.git
 
 
 
 
 
+# mkdir -p /etc/wireguard/keys
+# cd /etc/wireguard/keys
+# umask 077
+# wg genkey | tee privatekey | wg pubkey > publickey
+
+# # mkdir /etc/wiregaurd/
+# cp wiregaurd.conf /etc/wiregaurd/
+
+# systemctl start wg-quick@wg0.service
 
 
 # caddy start
