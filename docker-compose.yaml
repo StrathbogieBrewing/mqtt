@@ -6,26 +6,12 @@ services:
       dockerfile: ./mosquitto/Containerfile
     restart: unless-stopped
     ports:
+      - 1883:1883 # Standard MQTT port
       - 8883:8883 # Standard MQTTS port
     volumes:
       - ./mosquitto/config:/mosquitto/config # Mount local config directory
       - ./mosquitto/data:/mosquitto/data   # Mount local data directory for persistence
       - ./mosquitto/log:/mosquitto/log     # Mount local log directory
-    command: mosquitto
-
-  # mosquitto:
-  #   image: docker.io/eclipse-mosquitto
-  #   ports:
-  #     - 1883:1883
-  #   volumes:
-  #     - ./mosquitto/config:/mosquitto/config:ro
-  #     - ./mosquitto/data:/mosquitto/data
-  #     - ./mosquitto/log:/mosquitto/log
-  #   restart: unless-stopped
-
-# # volumes:
-#   mosquitto_data:
-#   mosquitto_log:
 
 # networks:
 #   network:
