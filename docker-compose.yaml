@@ -1,6 +1,7 @@
 version: '3'
 services:
   mosquitto:
+    container_name: mosquitto
     build:
       dockerfile: ./mosquitto/Containerfile
     restart: unless-stopped
@@ -10,6 +11,7 @@ services:
       - ./mosquitto/config:/mosquitto/config # Mount local config directory
       - ./mosquitto/data:/mosquitto/data   # Mount local data directory for persistence
       - ./mosquitto/log:/mosquitto/log     # Mount local log directory
+    command: mosquitto
 
   # mosquitto:
   #   image: docker.io/eclipse-mosquitto
