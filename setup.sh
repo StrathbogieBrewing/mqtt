@@ -5,6 +5,7 @@ apt install -y podman podman-compose git wireguard ufw
 
 ufw allow 22/tcp
 ufw allow 5180/udp
+ufw allow in on wg0
 ufw enable
 
 mkdir -p /etc/wireguard/keys
