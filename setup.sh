@@ -22,6 +22,7 @@ systemctl enable wg-quick@wg0.service
 
 adduser mosquitto
 su mosquitto
+chmod -R 777 mqtt/mosquitto/log
 
 
 
